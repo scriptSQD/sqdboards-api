@@ -10,8 +10,17 @@ import { OrderByOidController } from './order-by-oid/order-by-oid.controller';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://userapi:1111@cluster0.v4qgc.mongodb.net/SQDBoardsDB?retryWrites=true&w=majority'),
-    MongooseModule.forFeature([{name: Deal.name, schema: DealSchema}, {name: Order.name, schema: OrderSchema}])
+    MongooseModule.forRoot('mongodb+srv://userapi:1111@cluster0.v4qgc.mongodb.net/SQDBoardsDeals?retryWrites=true&w=majority', {
+      connectionName: 'deals'
+    }),
+    MongooseModule.forRoot('mongodb+srv://userapi:1111@cluster0.v4qgc.mongodb.net/SQDBoardsConfigurator?retryWrites=true&w=majority', {
+      connectionName: 'configurator'
+    }),
+    MongooseModule.forRoot('mongodb+srv://userapi:1111@cluster0.v4qgc.mongodb.net/SQDBoardsOrders?retryWrites=true&w=majority', {
+      connectionName: 'orders'
+    }),
+    MongooseModule.forFeature([{name: Deal.name, schema: DealSchema}], 'deals'),
+    MongooseModule.forFeature([{name: Order.name, schema: OrderSchema}], 'orders')
   ],
   controllers: [AppController, OrdersByUidController, DealsController, OrderByOidController],
   providers: [AppService],

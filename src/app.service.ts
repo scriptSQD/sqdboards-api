@@ -17,7 +17,7 @@ export class AppService {
     return this.ordersDb.aggregate([
       {
         "$search": {
-          "index": "orderByUserId",
+          "index": "ordersByUserId",
           "text": {
             "query": uid,
             "path": "byUser"
@@ -28,7 +28,8 @@ export class AppService {
   }
 
   async getOrderByOid(oid: string): Promise<Order> {
-    return this.ordersDb.findOne({id: oid}).exec();
+    console.log(oid);
+    return this.ordersDb.findById(oid);
   }
 
 }
