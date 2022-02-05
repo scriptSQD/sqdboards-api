@@ -1,11 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from 'src/app.service';
 import { Deal } from 'src/schemas/deal.schema';
+import { DealsService } from './deals.service';
 
 @Controller('deals')
 export class DealsController {
 
-    constructor(private service: AppService) {};
+    constructor(private service: DealsService) {};
 
     @Get()
     async getDeals(): Promise<Deal[]> {
